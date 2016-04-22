@@ -10,15 +10,25 @@
 
 namespace MyOGL {
 
+Rect Render::s_mWindow(200,200,500,500);
+Color Render::s_mFColor(0.0,0.0,0.0,0.0) ;
+Color Render::s_mBkgColor(1.0,1.0,1.0,0.0) ;
+
+
 Render::Render() {
 }
 
 Render::~Render() {
 }
 
+Rect
+Render::getWindow() {
+	return s_mWindow;
+}
+
 void
 Render::renderInit() {
-	glClearColor(1.0f,1.0f,1.0f,0.0f);
+	glClearColor(s_mBkgColor.R(),s_mBkgColor.G(),s_mBkgColor.B(),s_mBkgColor.A());
 	glShadeModel(GL_FLAT);
 }
 
@@ -27,7 +37,7 @@ Render::renderReshape(int w,int h) {
 	glViewport(0,0,(GLsizei)w, (GLsizei)h);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluOrtho2D(0.0, (GLdouble)w, 0.0, (GLdouble)h);
+	gluOrtho2D(0.0, 20.0, 0.0, 20.0);
 }
 
 void
@@ -38,7 +48,7 @@ Render::renderDisplay() {
 
 void
 Render::rBackground() {
-
+	glClear(GL_COLOR_BUFFER_BIT);
 }
 
 void
@@ -49,14 +59,13 @@ Render::rFront() {
 
 void
 Render::rOutlet() {
-    glClear(GL_COLOR_BUFFER_BIT);
-    glColor3f(0.0, 0.0, 0.0);
-
+	glColor3f(s_mFColor.R(), s_mFColor.G(), s_mFColor.B());
+    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glBegin(GL_POLYGON);
         glVertex2f(1, 1);
-        glVertex2f(20,  1 );
-        glVertex2f(20, 20);
-        glVertex2f(2 , 20);
+        glVertex2f(10,  1 );
+        glVertex2f(10, 20);
+        glVertex2f(1 , 10);
     glEnd();
 
     glFlush();

@@ -11,11 +11,11 @@
 
 namespace MyOGL {
 
-App::App(int *pargc,char **argv, void (*init)(), void (*renderDisplay)(), void (*renderReshape)(int,int) ) {
+App::App(int *pargc,char **argv, Rect win, void (*init)(), void (*renderDisplay)(), void (*renderReshape)(int,int) ) {
 	glutInit(pargc, argv);
 	glutInitDisplayMode(GLUT_SINGLE);
-	glutInitWindowSize(500,500);
-	glutInitWindowPosition(100,100);
+	glutInitWindowSize(win.W(),win.H());
+	glutInitWindowPosition(win.Left(),win.Top());
 	glutCreateWindow("Render-32  Powered by OpenGL");
 
 	init();
@@ -24,7 +24,7 @@ App::App(int *pargc,char **argv, void (*init)(), void (*renderDisplay)(), void (
 }
 
 App::~App() {
-	// TODO Auto-generated destructor stub
+
 }
 
 void

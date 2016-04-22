@@ -8,11 +8,13 @@
 #ifndef APP_H_
 #define APP_H_
 
+#include "Rect.h"
+
 namespace MyOGL {
 
 class App {
 public:
-	App(int *,char **, void (*)(), void (*)(), void (*)(int,int) );
+	App(int *,char **, Rect, void (*)(), void (*)(), void (*)(int,int) );
 	virtual ~App();
 	void mainLoop();
 
