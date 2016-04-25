@@ -45,6 +45,20 @@ std::vector<Point2D> Render::s_mYangtai = {
 		{4.5,1.5}
 };
 
+std::vector<Point2D> Render::s_mKitchen = {
+		{0,0},
+		{5,0},
+		{5,-2.4},
+		{5-0.13,-2.4},
+		{5-0.13,-2.4-1.9},
+		{5-1.2,-2.4-1.9},
+		{5-1.2,-2.4},
+		{0,-2.4},
+		{0,0}
+};
+
+
+
 Render::Render() {
 }
 
@@ -104,23 +118,29 @@ drawStrip(std::vector<Point2D> &points) {
 
 void
 Render::rOutlet() {
+	rOutlet1();
+	rOutlet2();
+}
 
-
+void
+Render::rOutlet1() {
 	drawStrip(s_mOutletPoints1);
+}
 
-
+void
+Render::rOutlet2() {
 	glPushMatrix();
 	glTranslatef(-2.4f,10.72f,0.0f);
 	glRotatef(-30,0.0f,0.0f,1.0f);
 	drawStrip(s_mOutletPoints2);
 	glPopMatrix();
-
-
 }
+
 
 void
 Render::rRooms() {
 	rYangtai();
+	rKitchen();
 }
 
 void
@@ -130,6 +150,14 @@ Render::rYangtai() {
 	drawStrip(s_mYangtai);
 	glPopMatrix();
 
+}
+
+void
+Render::rKitchen() {
+	glPushMatrix();
+	glTranslatef(3.58+4.5+1.2-5,6.4+1.9+2.4,0.0);
+	drawStrip(s_mKitchen);
+	glPopMatrix();
 }
 
 } /* namespace MyOGL */

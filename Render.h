@@ -27,8 +27,11 @@ private:
 	static void rBackground();
 	static void rFront();
 	static void rOutlet();
+	static void rOutlet1();
+	static void rOutlet2();
 	static void rRooms();
 	static void rYangtai();
+	static void rKitchen();
 
 	static Rect s_mWindow;
 	static Color s_mBkgColor ;
@@ -37,6 +40,7 @@ private:
 	static std::vector<Point2D> s_mOutletPoints2;
 
 	static std::vector<Point2D> s_mYangtai;
+	static std::vector<Point2D> s_mKitchen;
 
 };
 
