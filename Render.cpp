@@ -10,7 +10,7 @@
 
 namespace MyOGL {
 
-Rect Render::s_mWindow(200,200,500,500);
+Rect Render::s_mWindow(100,100,800,800);
 Color Render::s_mFColor(0.0,0.0,0.0,0.0) ;
 Color Render::s_mBkgColor(1.0,1.0,1.0,0.0) ;
 
@@ -63,7 +63,7 @@ Render::rOutlet() {
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     glBegin(GL_POLYGON);
         glVertex2f(1, 1);
-        glVertex2f(10,  1 );
+        glVertex2f(10,  2 );
         glVertex2f(10, 20);
         glVertex2f(1 , 10);
     glEnd();
