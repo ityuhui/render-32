@@ -8,7 +8,7 @@
 #ifndef RECT_H_
 #define RECT_H_
 
-#include "Point.h"
+#include "Point2D.h"
 
 namespace MyOGL {
 
@@ -23,7 +23,7 @@ public:
 	rd W();
 	rd H();
 private:
-	Point mLeftTop;
+	Point2D mLeftTop;
 	rd mWidth;
 	rd mHeight;
 };

@@ -13,6 +13,12 @@ namespace MyOGL {
 Rect Render::s_mWindow(100,100,800,800);
 Color Render::s_mFColor(0.0,0.0,0.0,0.0) ;
 Color Render::s_mBkgColor(1.0,1.0,1.0,0.0) ;
+std::vector<Point2D> Render::s_mOutletPoints = {
+		{1,1},
+		{10,1},
+		{10,10},
+		{1,10}
+};
 
 
 Render::Render() {
@@ -60,15 +66,13 @@ Render::rFront() {
 void
 Render::rOutlet() {
 	glColor3f(s_mFColor.R(), s_mFColor.G(), s_mFColor.B());
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    glBegin(GL_POLYGON);
-        glVertex2f(1, 1);
-        glVertex2f(10,  2 );
-        glVertex2f(10, 20);
-        glVertex2f(1 , 10);
-    glEnd();
-
-    glFlush();
+	glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+	glBegin(GL_POLYGON);
+		for(auto iter = s_mOutletPoints.begin(); iter!=s_mOutletPoints.end(); iter++){
+			glVertex2f(static_cast<GLfloat>(iter->X()),static_cast<GLfloat>(iter->Y()));
+		}
+	glEnd();
+	glFlush();
 }
 
 void

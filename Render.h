@@ -8,8 +8,10 @@
 #ifndef RENDER_H_
 #define RENDER_H_
 
+#include <vector>
 #include "Rect.h"
 #include "Color.h"
+#include "Point2D.h"
 
 namespace MyOGL {
 
@@ -30,6 +32,8 @@ private:
 	static Rect s_mWindow;
 	static Color s_mBkgColor ;
 	static Color s_mFColor;
+	static std::vector<Point2D> s_mOutletPoints;
+
 };
 
 } /* namespace MyOGL */

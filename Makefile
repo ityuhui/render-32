@@ -1,17 +1,21 @@
-OBJS:=App.o Render.o Color.o Point.o Rect.o
+OBJS:=Color.o Point2D.o Rect.o Render.o App.o main.o
+CLFAGS:=-std=c++11
+LINKFLAGS:=-lglut -lGL -lGLEW -lGLU
 
 main:$(OBJS)
-	g++ main.cpp $(OBJS) -lglut -lGL -lGLEW -lGLU -o Render-32
+	g++ $(OBJS) $(CLFAGS) $(LINKFLAGS) -o Render-32
+main.o:
+	g++ $(CLFAGS) -c main.cpp
 App.o:App.h
-	g++ -c App.cpp
+	g++ $(CLFAGS) -c App.cpp
 Render.o:Render.h
-	g++ -c Render.cpp
+	g++ $(CLFAGS) -c Render.cpp
 Color.o:Color.h
-	g++ -c Color.cpp
-Point.o:Point.h
-	g++ -c Point.cpp
+	g++ $(CLFAGS) -c Color.cpp
+Point2D.o:Point2D.h
+	g++ $(CLFAGS) -c Point2D.cpp
 Rect.o:Rect.h
-	g++ -c Rect.cpp
+	g++ $(CLFAGS) -c Rect.cpp
 clean:
 	rm *.o
 
