@@ -27,12 +27,16 @@ private:
 	static void rBackground();
 	static void rFront();
 	static void rOutlet();
-	static void rRoom();
+	static void rRooms();
+	static void rYangtai();
 
 	static Rect s_mWindow;
 	static Color s_mBkgColor ;
 	static Color s_mFColor;
-	static std::vector<Point2D> s_mOutletPoints;
+	static std::vector<Point2D> s_mOutletPoints1;
+	static std::vector<Point2D> s_mOutletPoints2;
+
+	static std::vector<Point2D> s_mYangtai;
 
 };
 
