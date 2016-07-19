@@ -14,24 +14,24 @@ Rect Render::s_mWindow(100,100,800,800);
 Color Render::s_mFColor(0.0,0.0,0.0,0.0) ;
 Color Render::s_mBkgColor(1.0,1.0,1.0,0.0) ;
 std::vector<Point2D> Render::s_mOutletPoints1 = {
-		{0, 4.18+1.8+2.99},
-		{0, 4.18+1.8},
-		{-0.63,4.18+1.8},
-		{-0.63,4.18},
-		{0,4.18},
+		{0, mainBedDep+mainToiDep+ChildRoomDep},
+		{0, mainBedDep+mainToiDep},
+		{0-mainToiLeft,mainBedDep+mainToiDep},
+		{0-mainToiLeft,mainBedDep},
+		{0,mainBedDep},
 		{0, 0},
-		{3.58, 0},
-		{3.58+4.5, 0},
-		{3.58+4.5, 6.4},
-		{3.58+4.5+1.07, 6.4},
-		{3.58+4.5+1.07, 6.4+1.9 },
-		{3.58+4.5+1.07+0.13, 6.4+1.9 },
-		{3.58+4.5+1.07+0.13, 6.4+1.9+2.4 },
-		{3.58+4.5+1.07+0.13-5, 6.4+1.9+2.4 },
-		{3.58+4.5+1.07+0.13-5, 6.4+1.9+2.4+2.35 },
-		{3.58+4.5+1.07+0.13-5-1.42, 6.4+1.9+2.4+2.35 },
+		{mainBedBay, 0},
+		{mainBedBay+livingBay, 0},
+		{mainBedBay+livingBay, 6.4},
+		{mainBedBay+livingBay+washingBay, 6.4},
+		{mainBedBay+livingBay+washingBay, 6.4+washingDep },
+		{mainBedBay+livingBay+washingBay, 6.4+washingDep+kitchenDep },
+		{mainBedBay+livingBay+washingBay-kitchenBay, 6.4+washingDep+kitchenDep },
+		{mainBedBay+livingBay+washingBay-kitchenBay, 6.4+washingDep+kitchenDep+outdoorDep },
+		{mainBedBay+livingBay+washingBay-kitchenBay-outdoorBay, 6.4+washingDep+kitchenDep+outdoorDep },
 };
 
+/*次卧的外轮廓*/
 std::vector<Point2D> Render::s_mOutletPoints2 = {
 		{3.38,4.6},
 		{0,4.6},
@@ -41,22 +41,51 @@ std::vector<Point2D> Render::s_mOutletPoints2 = {
 
 std::vector<Point2D> Render::s_mYangtai = {
 		{0,0},
-		{0,1.48},
-		{4.5,1.5}
+		{0,balconyDep},
+		{balconyBay,balconyDep}
 };
 
 std::vector<Point2D> Render::s_mKitchen = {
 		{0,0},
-		{5,0},
-		{5,-2.4},
-		{5-0.13,-2.4},
-		{5-0.13,-2.4-1.9},
-		{5-1.2,-2.4-1.9},
-		{5-1.2,-2.4},
-		{0,-2.4},
+		{kitchenBay,0},
+		{kitchenBay, 0 - kitchenDep - washingDep },
+		{kitchenBay-washingBay, 0 - kitchenDep - washingDep },
+		{kitchenBay-washingBay, 0 - kitchenDep },
+		{0,0 - kitchenDep},
 		{0,0}
 };
 
+std::vector<Point2D> Render::s_mKeting = {
+	{0,0},
+	{livingBay,0},
+	{livingBay,livingDep},
+	{0,livingDep},
+	{0,0}
+};
+
+std::vector<Point2D> Render::s_mMainBed = {
+	{0,0},
+	{mainBedBay,0},
+	{mainBedBay,mainBedDep},
+	{0,mainBedDep},
+	{0,0}
+};
+
+std::vector<Point2D> Render::s_mMainToi = {
+	{0,0},
+	{mainToiBay,0},
+	{mainToiBay,mainToiDep},
+	{0,mainToiDep},
+	{0,0}
+};
+
+std::vector<Point2D> Render::s_mChildRoom = {
+	{0,0},
+	{ChildRoomBay,0},
+	{ChildRoomBay,ChildRoomDep},
+	{0,ChildRoomDep},
+	{0,0}
+};
 
 
 Render::Render() {
@@ -119,7 +148,7 @@ drawStrip(std::vector<Point2D> &points) {
 void
 Render::rOutlet() {
 	rOutlet1();
-	rOutlet2();
+	//rOutlet2();
 }
 
 void
@@ -141,12 +170,54 @@ void
 Render::rRooms() {
 	rYangtai();
 	rKitchen();
+	rKeting();
+	rMainBed();
+	rMainToi();
+	rChildRoom();
+}
+
+void
+Render::rChildRoom() {
+	rRoom(0.0f,mainBedDep+mainToiDep,s_mChildRoom);
+}
+
+void
+Render::rRoom(float x, float y, std::vector<Point2D> &v) {
+	glPushMatrix();
+	glTranslatef(x,y,0.0f);
+	drawStrip(v);
+	glPopMatrix();
+}
+
+void
+Render::rMainToi() {
+	glPushMatrix();
+	glTranslatef(0-mainToiLeft,mainBedDep,0.0f);
+	drawStrip(s_mMainToi);
+	glPopMatrix();
+}
+
+
+void
+Render::rMainBed() {
+	glPushMatrix();
+	glTranslatef(0.0f,0.0f,0.0f);
+	drawStrip(s_mMainBed);
+	glPopMatrix();
+}
+
+void
+Render::rKeting() {
+	glPushMatrix();
+	glTranslatef(mainBedBay,balconyDep,0.0f);
+	drawStrip(s_mKeting);
+	glPopMatrix();
 }
 
 void
 Render::rYangtai() {
 	glPushMatrix();
-	glTranslatef(3.58f,0.0f,0.0f);
+	glTranslatef(mainBedBay,0.0f,0.0f);
 	drawStrip(s_mYangtai);
 	glPopMatrix();
 
@@ -155,7 +226,7 @@ Render::rYangtai() {
 void
 Render::rKitchen() {
 	glPushMatrix();
-	glTranslatef(3.58+4.5+1.2-5,6.4+1.9+2.4,0.0);
+	glTranslatef(mainBedBay+livingBay+washingBay-kitchenBay,6.4+washingDep+kitchenDep,0.0);
 	drawStrip(s_mKitchen);
 	glPopMatrix();
 }
